@@ -1,4 +1,4 @@
-# 🛡️ Password Strength Analyzer & Secure Generator
+# 🛡️ Password Strength Analyzer 
 
 A sleek, lightweight web-based cybersecurity utility that evaluates user-entered passwords against cryptographic metrics, estimates brute-force vulnerability, and generates unguessable alternatives. 
 
