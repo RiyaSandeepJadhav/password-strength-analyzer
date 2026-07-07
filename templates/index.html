@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card">
+            <h1>
+                <i class="fa-solid fa-shield-halved"></i>
+                Password Strength Analyzer
+            </h1>
+
+            <p class="subtitle">
+                Check password strength, entropy, uniqueness and generate secure passwords.
+            </p>
+
+            <div class="input-group">
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="Enter your password">
+                <button id="togglePassword">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </div>
+
+            <div class="button-group">
+                <button type="button" id="analyzeBtn">Analyze Password</button>
+                <button type="button" id="clearBtn" class="btn-clear">Clear</button> 
+            </div>
+
+            <button id="generateBtn" class="secondary-btn">
+                <i class="fa-solid fa-key"></i>
+                Generate Strong Password
+            </button>
+
+            <div class="generated-box">
+                <label>Generated Password</label>
+                <div class="generated-row">
+                    <input 
+                        type="text" 
+                        id="generatedPassword" 
+                        readonly>
+                    <button id="copyBtn">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <hr>
+
+            <h2>Analysis Result</h2>
+
+            <div class="strength-container">
+                <div class="strength-bar">
+                    <div id="strengthFill"></div>
+                </div>
+                <span id="strengthText">Waiting...</span>
+            </div>
+
+            <div class="score-box">
+                <div>
+                    <h3>Score <i class="fa-solid fa-circle-info" title="A weighted structural score out of 100 based on length, character sets, and common patterns."></i></h3>
+                    <p id="score">0 / 100</p>
+                </div>
+                <div>
+                    <h3>Length <i class="fa-solid fa-circle-info" title="Total characters. Cryptographic consensus recommends at least 12-16 characters."></i></h3>
+                    <p id="length">0</p>
+                </div>
+                <div>
+                    <h3>Entropy <i class="fa-solid fa-circle-info" title="Calculated using Shannon's Entropy formula (L * log2(R)). Measures pure mathematical randomness."></i></h3>
+                    <p id="entropy">0 bits</p>
+                </div>
+                <div>
+                    <h3>Entropy Level</h3>
+                    <p id="entropyLevel">-</p>
+                </div>
+                <div>
+                    <h3>Estimated Crack Time</h3>
+                    <p id="crackTime">-</p>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h2>Password Checks</h2>
+                <ul>
+                    <li id="upper">❌ Uppercase Letter</li>
+                    <li id="lower">❌ Lowercase Letter</li>
+                    <li id="number">❌ Number</li>
+                    <li id="special">❌ Special Character</li>
+                    <li id="common">✅ Not Common Password</li>
+                    <li id="repeat">✅ No Repeated Characters</li>
+                    <li id="sequence">✅ No Sequential Pattern</li>
+                </ul>
+            </div>
+
+            <div id="reuseWarning" class="warning hidden">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                This password has already been used before.
+            </div>
+
+            <div class="suggestions">
+                <h2>
+                    <i class="fa-solid fa-lightbulb"></i>
+                    Suggestions
+                </h2>
+                <ul id="suggestionList">
+                    <li>Enter a password to begin analysis.</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

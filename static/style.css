@@ -1,0 +1,372 @@
+/* ==========================================================================
+   Password Strength Analyzer - Cybersecurity Theme (Polished Version)
+   ========================================================================== */
+
+/* Reset & Base Variables */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #0b1220, #111827, #1e1b4b);
+  --card-bg: rgba(17, 24, 39, 0.95);
+  --input-bg: #1e293b;
+  --border-color: #334155;
+  --border-focus: #3b82f6;
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --accent-blue: #60a5fa;
+  --btn-primary: #2563eb;
+  --btn-primary-hover: #1d4ed8;
+  --btn-secondary: #16a34a;
+  --btn-secondary-hover: #15803d;
+  --btn-utility: #334155;
+  --btn-utility-hover: #475569;
+  --danger: #ef4444;
+  --danger-bg: rgba(127, 29, 29, 0.4);
+}
+
+body {
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* Layout Container */
+.container {
+  width: 100%;
+  max-width: 850px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 
+              0 0 40px rgba(59, 130, 246, 0.1);
+}
+
+/* Typography */
+h1 {
+  text-align: center;
+  color: var(--accent-blue);
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 30px;
+}
+
+h2, h3 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Form Controls & Inputs */
+.input-group, 
+.generated-row {
+  display: flex;
+  gap: 12px;
+}
+
+input {
+  flex: 1;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-main);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+input::placeholder {
+  color: #64748b;
+}
+
+/* Buttons System */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 22px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+#togglePassword, 
+#copyBtn {
+  background: var(--btn-utility);
+  color: var(--text-main);
+}
+
+#togglePassword:hover, 
+#copyBtn:hover {
+  background: var(--btn-utility-hover);
+}
+
+.button-group {
+  display: flex;
+  gap: 16px;
+  margin: 24px 0 12px 0; /* Balanced margin adjustments */
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Make both Analyze and Clear expand evenly to fill the entire horizontal row space */
+#analyzeBtn, 
+#clearBtn {
+  flex: 1; /* This forces them to scale up and become larger */
+  min-width: 140px; /* Prevents them from shrinking too small */
+}
+.primary-btn {
+  background: var(--btn-primary);
+  color: #fff;
+  flex: 1;
+}
+
+.primary-btn:hover {
+  background: var(--btn-primary-hover);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.secondary-btn {
+  background: var(--btn-secondary);
+  color: #fff;
+  flex: 1;
+}
+
+.secondary-btn:hover {
+  background: var(--btn-secondary-hover);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+}
+
+/* Global Fixes for Specific Operation Flow Buttons */
+#analyzeBtn {
+    background-color: #2563eb !important; /* Premium Modern Blue */
+    color: #ffffff !important;
+    border: 1px solid #3b82f6;
+    padding: 14px 22px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+#analyzeBtn:hover {
+    background-color: #1d4ed8 !important; /* Darker blue on hover */
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+#clearBtn {
+    background-color: #334155 !important; /* Elegant Slate Grey */
+    color: #cbd5e1 !important;            /* Soft silver-white text */
+    border: 1px solid #475569;
+    padding: 14px 22px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, transform 0.1s;
+}
+
+#clearBtn:hover {
+    background-color: #475569 !important;
+    color: #ffffff !important;             /* Pops to bright white on hover */
+}
+
+/* Generated Box Section */
+.generated-box {
+  margin: 24px 0;
+}
+
+.generated-box label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+hr {
+  margin: 30px 0;
+  border: 0;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Strength Meter */
+.strength-container {
+  margin: 24px 0;
+}
+
+.strength-bar {
+  height: 12px;
+  background: #1e293b;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+#strengthFill {
+  width: 0;
+  height: 100%;
+  background: var(--danger);
+  border-radius: 6px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              background-color 0.4s ease;
+}
+
+#strengthText {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Metrics Dashboard Grid - Single Cohesive Unit */
+.score-box {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Forms 5 equal horizontal columns on desktop */
+  gap: 14px;
+  margin: 20px 0;
+}
+
+.score-box div {
+  background: var(--input-bg);
+  border-radius: 12px;
+  padding: 16px 10px; /* Slimmer vertical padding compacts the blank space */
+  text-align: center;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.score-box div:hover {
+  border-color: #475569;
+  transform: translateY(-2px); /* Subtle high-tech interactive lift */
+}
+
+/* Typography balancing for unified grid */
+.score-box h3 {
+  color: var(--accent-blue);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.score-box p {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+/* Information Lists (Checklist & Suggestions) */
+.checklist, 
+.suggestions {
+  margin-top: 24px;
+  background: var(--input-bg);
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+}
+
+.checklist h2, 
+.suggestions h2 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: var(--accent-blue);
+}
+
+.checklist ul, 
+.suggestions ul {
+  list-style-type: none;
+}
+
+.checklist li, 
+.suggestions li {
+  margin: 12px 0;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  color: #e2e8f0;
+}
+
+/* System Warnings */
+.warning {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: var(--danger-bg);
+  border: 1px solid var(--danger);
+  border-radius: 12px;
+  color: #fecaca;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Utility Classes */
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Responsive Design (Mobile Only Views)
+   ========================================================================== */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  
+  .card {
+    padding: 24px;
+    border-radius: 16px;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  .input-group, 
+  .generated-row, 
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  button {
+    width: 100%;
+  }
+  
+  #clearBtn {
+    margin-left: 0 !important; /* Stack neatly on phones */
+  }
+}
