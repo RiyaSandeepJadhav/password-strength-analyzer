@@ -45,3 +45,5 @@ Standard random number generators are deterministic and guessable. The generator
 * **SQLite:** Local storage mechanism handling history token tracking.
 
 ---
+screenshot 1.png
+
