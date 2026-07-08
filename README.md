@@ -55,3 +55,5 @@ screenshot_2.png
 screenshot_3.png
 
 Automatically_generrated_password.png
+
+![Home Page](screenshot_1.png)
