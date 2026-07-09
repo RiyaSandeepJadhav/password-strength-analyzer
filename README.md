@@ -45,3 +45,18 @@ Standard random number generators are deterministic and guessable. The generator
 * **SQLite:** Local storage mechanism handling history token tracking.
 
 ---
+
+# 👩‍💻 Author
+
+**Riya Sandeep Jadhav**
+
+- Cybersecurity Enthusiast
+- Python Developer
+
+---
+
+# ⭐ Support
+
+If you found this project helpful, consider giving it a **⭐ Star** on GitHub.
+
+It helps others discover the project and supports future improvements.
